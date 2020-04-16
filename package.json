@@ -1,0 +1,20 @@
+{
+  "name": "server-client-purescript",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "spago install",
+    "clean": "rm -rf dist",
+    "build:client": "spago build --path src/ClientMain.purs",
+    "build:server": "spago build --path src/ServerMain.purs",
+    "build": "yarn build:client && yarn build:server",
+    "bundle:client": "spago bundle-app --main ClientMain --to dist/client/index.js && cp asset/index.html dist/client",
+    "bundle:server": "spago bundle-app --main ServerMain --to dist/server/index.js",
+    "bundle": "yarn bundle:client && yarn bundle:server",
+    "serve:client": "open dist/client/index.html",
+    "serve:server": "node dist/server/index.js",
+    "serve": "yarn serve:client && yarn serve:server"
+  },
+  "devDependencies": {
+    "spago": "^0.15.2"
+  }
+}
