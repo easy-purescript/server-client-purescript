@@ -8,7 +8,7 @@ Requirements
 ```sh
 yarn # postinstall
 yarn bundle # create js files
-yarn serve # open html and start server
+yarn serve # run servers
 ```
 
-TODO: CORS
+Access to [http://localhost:5000](http://localhost:5000)
