@@ -11,7 +11,7 @@
     "bundle:client": "spago bundle-app --main ClientMain --to dist/client/index.js",
     "bundle:server": "spago bundle-app --main ServerMain --to dist/server/index.js",
     "bundle": "run-s bundle:*",
-    "serve:client": "http-server -p 8000 dist/client",
+    "serve:client": "http-server -p 3000 dist/client",
     "serve:server": "node dist/server/index.js",
     "serve:proxy": "node proxy.js",
     "serve": "run-p serve:*"
@@ -19,9 +19,11 @@
   "devDependencies": {
     "cpx": "^1.5.0",
     "express": "^4.17.1",
-    "http-server": "^0.12.1",
+    "http-server": "^0.12.3",
     "npm-run-all": "^4.1.5",
+    "purescript": "^0.13.8",
+    "purty": "^6.3.0",
     "rimraf": "^3.0.2",
-    "spago": "^0.15.2"
+    "spago": "^0.19.0"
   }
 }

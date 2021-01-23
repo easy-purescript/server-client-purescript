@@ -46,9 +46,10 @@ render state =
   HH.div_
     [ HH.button
         [ HE.onClick \_ -> Just RequestAll ]
-        [ HH.text "Request" ]
-    , HH.p_
-        [ HH.text $ show state.blanketList ]
+        [ HH.text "Request All" ]
+    , case state.blanketList of
+        [] -> HH.p_ [ HH.text "no data" ]
+        bs -> HH.ul_ $ bs <#> \b -> HH.li_ [ showBlanket b ]
     , HH.input
         [ HP.type_ HP.InputNumber
         , HP.value $ show state.num
@@ -57,18 +58,26 @@ render state =
     , HH.button
         [ HE.onClick \_ -> Just RequestOne ]
         [ HH.text "Request One" ]
-    , HH.p_
-        [ HH.text $ show state.blanket ]
+    , case state.blanket of
+        Nothing -> HH.p_ [ HH.text "no data" ]
+        Just b -> showBlanket b
     ]
+  where
+  showBlanket b =
+    HH.ul_
+      [ HH.li_ [ HH.text $ show b.id ]
+      , HH.li_ [ HH.text b.name ]
+      , HH.li_ [ HH.text $ show b.madeOf ]
+      ]
 
 handleAction ∷ forall o m. MonadAff m => Action → H.HalogenM State Action () o m Unit
 handleAction = case _ of
   RequestAll -> do
-    res <- H.liftAff task.blanketList."GET"
+    res <- H.liftAff task.blanket.list."GET"
     H.modify_ \st -> st { blanketList = res }
   RequestOne -> do
     s <- H.get
-    res <- H.liftAff $ (task.blanket s.num)."GET"
+    res <- H.liftAff $ (task.blanket.find s.num)."GET"
     H.modify_ \st -> st { blanket = res }
   UpdateNum s -> case fromString s of
     Just n -> H.modify_ \st -> st { num = n }

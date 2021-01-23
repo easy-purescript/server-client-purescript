@@ -6,9 +6,14 @@ Requirements
 - node
 
 ```sh
-yarn # postinstall
+yarn # install dependencies
+yarn build # build source
 yarn bundle # create js files
 yarn serve # run servers
 ```
 
-Access to [http://localhost:5000](http://localhost:5000)
+Access to
+
+- both (proxy): [http://localhost:8000](http://localhost:8000)
+- server only: [http://localhost:5000](http://localhost:5000)
+- client only: [http://localhost:3000](http://localhost:3000)
